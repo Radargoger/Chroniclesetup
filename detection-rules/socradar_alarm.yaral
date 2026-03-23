@@ -1,1 +1,26 @@
+rule socradar_alarm {
+  meta:
+    author = "SOCRadar"
+    description = "Detects all SOCRadar CTI alarms and assigns risk score based on severity level"
+    severity = "HIGH"
+    priority = "HIGH"
 
+  events:
+    $e.metadata.vendor_name = "SOCRadar"
+    $e.metadata.product_name = "SOCRadar CTI"
+
+  outcome:
+    $risk_score = max(
+      if($e.security_result.severity = "CRITICAL", 95,
+      if($e.security_result.severity = "HIGH", 80,
+      if($e.security_result.severity = "MEDIUM", 50,
+      if($e.security_result.severity = "LOW", 25, 10))))
+    )
+    $severity = array_distinct($e.security_result.severity)
+    $alarm_title = array_distinct($e.metadata.description)
+    $alarm_type = array_distinct($e.metadata.product_event_type)
+    $affected_asset = array_distinct($e.additional.fields["alarm_asset"])
+
+  condition:
+    $e
+}
