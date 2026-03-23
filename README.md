@@ -227,9 +227,9 @@ security_result.detection_fields["alarm_id"] = "872"
 
 ## Support
 
-- **SOCRadar Documentation:** [https://socradar.io/docs](https://socradar.io/docs)
+- **SOCRadar Integration Support** : integration@socradar.io
 - **Google Chronicle Documentation:** [https://cloud.google.com/chronicle/docs](https://cloud.google.com/chronicle/docs)
-- **Issues:** Please open a GitHub issue for bug reports or feature requests
+- **Issues:** Please reach out integration@socradar.io
 
 ## License
 
